@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Orman Yangını Erken Uyarı Sistemi</title>
+    <meta
+      name="description"
+      content="Harita destekli, modern arayüzlü ve operasyon odaklı orman yangını erken uyarı platformu."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <link rel="stylesheet" href="./src/styles/main.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <span class="brand-kicker">Wildfire Readiness Suite</span>
+          <div class="brand-title-row">
+            <h1>Orman Yangını Erken Uyarı Sistemi</h1>
+            <span class="status-pill" id="systemStatus">Operational</span>
+            <span class="mini-chip" id="integrationStatus">-</span>
+          </div>
+        </div>
+        <div class="topbar-actions">
+          <button class="ghost-button" type="button" id="architectureButton">Mimari</button>
+          <button class="primary-button" type="button" id="simulateButton">Senaryo Yenile</button>
+        </div>
+      </header>
+
+      <main class="dashboard-grid">
+        <section class="hero-card">
+          <div class="hero-copy">
+            <p class="eyebrow">Decision Support Platform</p>
+            <h2>Daha sakin, daha okunabilir ve sahaya odaklı bir erken uyarı ekranı</h2>
+            <p class="hero-description">
+              Meteoroloji, topoğrafya, istasyon kapsaması ve müdahale hazırlığını tek ekranda
+              birleştirerek saha ekipleri için aksiyon önceliği üretir.
+            </p>
+            <div class="hero-actions">
+              <a class="primary-button button-link" href="#mapSection">Haritaya Git</a>
+              <a class="ghost-button button-link" href="#methodologySection">Metodoloji</a>
+            </div>
+          </div>
+          <div class="hero-metrics" id="metricsGrid"></div>
+        </section>
+
+        <section class="focus-layout">
+          <section class="panel control-panel">
+            <div class="panel-header">
+              <div>
+                <p class="panel-kicker">Control Center</p>
+                <h3>Filtreler ve Katmanlar</h3>
+              </div>
+              <span class="mini-chip accent" id="lastUpdatedChip">-</span>
+            </div>
+            <div class="controls-grid">
+              <label class="control-field">
+                <span>İl</span>
+                <select id="cityFilter"></select>
+              </label>
+              <label class="control-field">
+                <span>Risk Seviyesi</span>
+                <select id="riskFilter">
+                  <option value="all">Tümü</option>
+                  <option value="critical">Kritik</option>
+                  <option value="high">Yüksek</option>
+                  <option value="medium">Orta</option>
+                  <option value="low">Düşük</option>
+                </select>
+              </label>
+              <label class="control-field">
+                <span>Sıralama</span>
+                <select id="sortFilter">
+                  <option value="score-desc">Skor: yüksekten düşüğe</option>
+                  <option value="response-asc">Müdahale: hızlıdan yavaşa</option>
+                  <option value="wind-desc">Rüzgar: yüksekten düşüğe</option>
+                </select>
+              </label>
+            </div>
+            <div class="toggle-group">
+              <button class="toggle-chip active" type="button" data-layer="hotspots">Risk Noktaları</button>
+              <button class="toggle-chip active" type="button" data-layer="stations">İstasyonlar</button>
+              <button class="toggle-chip active" type="button" data-layer="coverage">Kapsama Alanı</button>
+            </div>
+            <div class="control-actions">
+              <button class="primary-button" type="button" id="testAlertButton">Test Alarmı Gönder</button>
+              <span class="mini-chip" id="alertStatusChip">Bildirim hazır değil</span>
+            </div>
+            <div class="auth-row">
+              <label class="control-field auth-field">
+                <span>Operatör Oturumu</span>
+                <select id="userSelect"></select>
+              </label>
+              <button class="ghost-button" type="button" id="loginButton">Oturum Aç</button>
+            </div>
+            <div class="operator-card" id="operatorCard">
+              <span class="selection-label">Aktif Operatör</span>
+              <h4>-</h4>
+              <p>Kullanıcı bilgisi API'den yüklenecek.</p>
+            </div>
+            <div class="selection-card" id="selectionCard">
+              <span class="selection-label">Seçili Bölge</span>
+              <h4>Haritadan bir risk noktası seçin</h4>
+              <p>Detay paneli, seçilen bölgenin ana risk sürücülerini ve operasyon notlarını gösterecek.</p>
+            </div>
+          </section>
+
+          <section class="panel live-map-panel" id="mapSection">
+            <div class="panel-header">
+              <div>
+                <p class="panel-kicker">Geo Intelligence</p>
+                <h3>Canlı Risk Haritası</h3>
+              </div>
+              <div class="legend">
+                <span><i class="legend-dot low"></i>Düşük</span>
+                <span><i class="legend-dot medium"></i>Orta</span>
+                <span><i class="legend-dot high"></i>Yüksek</span>
+                <span><i class="legend-dot critical"></i>Kritik</span>
+              </div>
+            </div>
+            <div id="map"></div>
+          </section>
+        </section>
+
+        <section class="tab-shell">
+          <div class="tab-header">
+            <div>
+              <p class="panel-kicker">Workspace</p>
+              <h3>Operasyon Panelleri</h3>
+            </div>
+            <div class="dashboard-tabs">
+              <button class="dashboard-tab active" type="button" data-dashboard-tab="operations">Operasyon</button>
+              <button class="dashboard-tab" type="button" data-dashboard-tab="analysis">Analiz</button>
+            </div>
+          </div>
+
+          <section class="tab-panel active" data-tab-panel="operations">
+            <section class="secondary-grid">
+              <section class="panel risk-panel">
+                <div class="panel-header">
+                  <div>
+                    <p class="panel-kicker">Priority Queue</p>
+                    <h3>Öncelikli Risk Bölgeleri</h3>
+                  </div>
+                  <span class="mini-chip" id="riskCountChip">-</span>
+                </div>
+                <div class="risk-list" id="riskList"></div>
+              </section>
+
+              <section class="panel station-panel">
+                <div class="panel-header">
+                  <div>
+                    <p class="panel-kicker">Field Readiness</p>
+                    <h3>İstasyon Hazırlık Durumu</h3>
+                  </div>
+                </div>
+                <div class="station-list" id="stationList"></div>
+              </section>
+
+              <section class="panel alerts-panel">
+                <div class="panel-header">
+                  <div>
+                    <p class="panel-kicker">Active Alerts</p>
+                    <h3>Alarm ve Müdahale Akışı</h3>
+                  </div>
+                  <span class="mini-chip accent">Mock Realtime</span>
+                </div>
+                <div class="alerts-list" id="alertsList"></div>
+              </section>
+
+              <section class="panel timeline-panel">
+                <div class="panel-header">
+                  <div>
+                    <p class="panel-kicker">Response Timeline</p>
+                    <h3>İlk 60 Dakika Planı</h3>
+                  </div>
+                </div>
+                <div class="timeline-list" id="timelineList"></div>
+              </section>
+
+              <section class="panel incident-panel">
+                <div class="panel-header">
+                  <div>
+                    <p class="panel-kicker">Incident Log</p>
+                    <h3>Olay Geçmişi</h3>
+                  </div>
+                </div>
+                <div class="incident-list" id="incidentList"></div>
+              </section>
+            </section>
+          </section>
+
+          <section class="tab-panel" data-tab-panel="analysis">
+            <section class="footer-grid">
+              <section class="panel insight-panel">
+                <div class="panel-header">
+                  <div>
+                    <p class="panel-kicker">Tactical Snapshot</p>
+                    <h3>Durum Değerlendirmesi</h3>
+                  </div>
+                </div>
+                <div class="insight-grid">
+                  <article class="insight-card">
+                    <span>Rüzgar Etkisi</span>
+                    <strong id="windInsight">-</strong>
+                    <p>Kuvvetli rüzgar, alev sıçramasını ve cephe yön değişimini hızlandırır.</p>
+                  </article>
+                  <article class="insight-card">
+                    <span>Nem Baskısı</span>
+                    <strong id="humidityInsight">-</strong>
+                    <p>Düşük bağıl nem, yanıcı örtünün tutuşma eşiğini düşürerek alarm hassasiyetini artırır.</p>
+                  </article>
+                  <article class="insight-card">
+                    <span>Operasyon Hazırlığı</span>
+                    <strong id="readinessInsight">-</strong>
+                    <p>İstasyon yayılımı, ekip yoğunluğu ve ilk erişim süresi birlikte değerlendirilir.</p>
+                  </article>
+                </div>
+              </section>
+
+              <section class="panel methodology-panel" id="methodologySection">
+                <div class="panel-header">
+                  <div>
+                    <p class="panel-kicker">Methodology</p>
+                    <h3>Skorlama Mantığı</h3>
+                  </div>
+                </div>
+                <div class="methodology-grid" id="methodologyGrid"></div>
+              </section>
+            </section>
+          </section>
+        </section>
+      </main>
+    </div>
+
+    <script
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script type="module" src="./src/scripts/app.js"></script>
+  </body>
+</html>

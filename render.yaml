@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: forest-fire-early-warning-system
+    env: node
+    plan: free
+    buildCommand: "echo Build step not required"
+    startCommand: "node server.js"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: WEATHER_PROVIDER
+        value: mock

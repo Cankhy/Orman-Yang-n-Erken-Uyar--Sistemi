@@ -1,0 +1,16 @@
+[
+  {
+    "id": "USR-01",
+    "name": "Abidin CAN",
+    "role": "Incident Commander",
+    "organization": "Bölgesel Yangın Koordinasyon Merkezi",
+    "permissions": ["view_dashboard", "manage_alerts", "review_incidents"]
+  },
+  {
+    "id": "USR-02",
+    "name": "Ece Yıldırım",
+    "role": "Field Analyst",
+    "organization": "Bölgesel Yangın Koordinasyon Merkezi",
+    "permissions": ["view_dashboard", "review_incidents"]
+  }
+]

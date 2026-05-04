@@ -1,0 +1,56 @@
+[
+  {
+    "id": "NTF-6",
+    "channel": "webhook",
+    "recipient": "regional-ops-demo",
+    "severity": "critical",
+    "title": "Kritik sıcak nokta test alarmı",
+    "sentAt": "2026-05-04T07:50:10.414Z",
+    "status": "mocked"
+  },
+  {
+    "id": "NTF-5",
+    "channel": "webhook",
+    "recipient": "regional-ops-demo",
+    "severity": "critical",
+    "title": "Kritik sıcak nokta test alarmı",
+    "sentAt": "2026-05-04T07:47:01.082Z",
+    "status": "mocked"
+  },
+  {
+    "id": "NTF-4",
+    "channel": "webhook",
+    "recipient": "regional-ops-demo",
+    "severity": "critical",
+    "title": "Kritik sıcak nokta test alarmı",
+    "sentAt": "2026-05-04T07:47:00.539Z",
+    "status": "mocked"
+  },
+  {
+    "id": "NTF-3",
+    "channel": "webhook",
+    "recipient": "regional-ops-demo",
+    "severity": "critical",
+    "title": "Kritik sıcak nokta test alarmı",
+    "sentAt": "2026-05-04T07:46:58.542Z",
+    "status": "mocked"
+  },
+  {
+    "id": "NTF-2",
+    "channel": "webhook",
+    "recipient": "regional-ops-demo",
+    "severity": "high",
+    "title": "Test",
+    "sentAt": "2026-05-04T07:46:35.939Z",
+    "status": "mocked"
+  },
+  {
+    "id": "NTF-0",
+    "channel": "webhook",
+    "recipient": "demo-endpoint",
+    "severity": "high",
+    "title": "Sistem hazır",
+    "sentAt": "2026-05-04T05:00:00.000Z",
+    "status": "mocked"
+  }
+]

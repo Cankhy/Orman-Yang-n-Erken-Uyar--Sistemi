@@ -1,0 +1,21 @@
+{
+  "name": "forest-fire-early-warning-system",
+  "version": "0.1.0",
+  "description": "Professional portfolio-grade forest fire early warning dashboard with interactive map and operational risk intelligence.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node tests/run.js"
+  },
+  "keywords": [
+    "forest-fire",
+    "early-warning",
+    "wildfire",
+    "gis",
+    "dashboard",
+    "portfolio"
+  ],
+  "author": "Abidin CAN",
+  "license": "MIT"
+}

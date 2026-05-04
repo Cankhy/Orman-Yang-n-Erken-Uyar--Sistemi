@@ -1,0 +1,29 @@
+[
+  {
+    "id": "INC-3004",
+    "title": "Manavgat Güney Hattı kritik izleme",
+    "severity": "critical",
+    "status": "monitoring",
+    "detectedAt": "2026-05-04T06:45:00.000Z",
+    "owner": "Aylin Demir",
+    "summary": "Rüzgar ve kuruluk birlikte eşik üstünde; hava devriyesi önerildi."
+  },
+  {
+    "id": "INC-3003",
+    "title": "Milas Çamlık Kuşağı ön alarm",
+    "severity": "high",
+    "status": "pre-positioned",
+    "detectedAt": "2026-05-04T05:55:00.000Z",
+    "owner": "Kerem Arslan",
+    "summary": "Yakın ekipler ön konumlandırıldı, kule teyidi sürüyor."
+  },
+  {
+    "id": "INC-3002",
+    "title": "Kuşadası Dilek Yarımadası drone taraması",
+    "severity": "medium",
+    "status": "observing",
+    "detectedAt": "2026-05-03T14:20:00.000Z",
+    "owner": "Ece Yıldırım",
+    "summary": "Uydu sinyaline karşı drone ile alan doğrulaması yapıldı."
+  }
+]
