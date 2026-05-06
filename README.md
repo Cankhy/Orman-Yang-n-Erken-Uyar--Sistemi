@@ -2,6 +2,13 @@
 
 Web tabanlı, harita destekli ve tam-stack mimariye sahip bir yangın karar destek platformu. Bu repo; modern operasyon ekranı, Node.js API katmanı, SQLite veri saklama, risk motoru, olay geçmişi, kullanıcı oturumu, test alarmı ve deploy hazırlığı ile CV ve GitHub için güçlü bir ürün vitrini olacak şekilde tasarlanmıştır.
 
+## Canlı Demo
+
+- GitHub Pages demo: [cankhy.github.io/Orman-Yang-n-Erken-Uyar-Sistemi](https://cankhy.github.io/Orman-Yang-n-Erken-Uyar-Sistemi/)
+
+Not:
+GitHub Pages sürümü statik demo olarak çalışır. Backend API gerektiren giriş ve test alarmı gibi özellikler Pages üzerinde pasif moda düşer.
+
 ## Öne Çıkan Özellikler
 
 - Harita destekli modern komuta merkezi arayüzü
@@ -13,12 +20,13 @@ Web tabanlı, harita destekli ve tam-stack mimariye sahip bir yangın karar dest
 - Test alarmı ve webhook entegrasyonuna hazır bildirim akışı
 - Open-Meteo ve OpenWeather destekli hava sağlayıcı yapısı
 - Sıfır bağımlılıkla çalışan test doğrulama betiği
-- Docker ve Render deploy hazırlığı
+- Docker, Render ve GitHub Pages hazırlığı
 
 ## GitHub İçin Hazır Paket
 
 - MIT lisansı
 - GitHub Actions CI workflow
+- GitHub Pages deploy workflow
 - PR şablonu
 - `.gitattributes` ile satır sonu standardizasyonu
 - temiz `.gitignore` ve örnek `.env`
@@ -28,20 +36,20 @@ Web tabanlı, harita destekli ve tam-stack mimariye sahip bir yangın karar dest
 ### Frontend
 
 - `index.html`: ana ürün yüzeyi
-- `src/scripts/app.js`: render, filtreleme, sekmeler, oturum ve alarm etkileşimleri
-- `src/scripts/dashboardService.js`: API-first, local-fallback veri erişimi
-- `src/styles/main.css`: arayüz, sekmeler, paneller ve responsive stiller
+- [`src/scripts/app.js`](src/scripts/app.js): render, filtreleme, sekmeler, oturum ve alarm etkileşimleri
+- [`src/scripts/dashboardService.js`](src/scripts/dashboardService.js): API-first, local-fallback veri erişimi
+- [`src/styles/main.css`](src/styles/main.css): arayüz, sekmeler, paneller ve responsive stiller
 
 ### Backend
 
-- `server.js`: HTTP sunucu ve route yönetimi
-- `backend/db/database.js`: SQLite kurulum ve seed işlemleri
-- `backend/services/dashboardService.js`: dashboard payload üretimi
-- `backend/services/riskEngine.js`: risk skorlama motoru
-- `backend/services/weatherProvider.js`: canlı veya mock hava verisi sağlayıcısı
-- `backend/services/notificationService.js`: test alarmı ve webhook gönderimi
-- `backend/services/incidentService.js`: olay kayıtları
-- `backend/services/userService.js`: kullanıcı ve oturum yönetimi
+- [`server.js`](server.js): HTTP sunucu ve route yönetimi
+- [`backend/db/database.js`](backend/db/database.js): SQLite kurulum ve seed işlemleri
+- [`backend/services/dashboardService.js`](backend/services/dashboardService.js): dashboard payload üretimi
+- [`backend/services/riskEngine.js`](backend/services/riskEngine.js): risk skorlama motoru
+- [`backend/services/weatherProvider.js`](backend/services/weatherProvider.js): canlı veya mock hava verisi sağlayıcısı
+- [`backend/services/notificationService.js`](backend/services/notificationService.js): test alarmı ve webhook gönderimi
+- [`backend/services/incidentService.js`](backend/services/incidentService.js): olay kayıtları
+- [`backend/services/userService.js`](backend/services/userService.js): kullanıcı ve oturum yönetimi
 
 ## API Uçları
 
@@ -53,17 +61,17 @@ Web tabanlı, harita destekli ve tam-stack mimariye sahip bir yangın karar dest
 - `POST /api/auth/login`
 - `POST /api/alerts/test`
 
-## Çalıştırma
+## Yerelde Çalıştırma
 
 ```bash
 node server.js
 ```
 
-Ardından [http://localhost:3000](http://localhost:3000) adresini açın.
+Ardından tarayıcıda `http://localhost:3000` adresini açın.
 
 ## Ortam Değişkenleri
 
-Örnek yapı [`.env.example`](C:\Users\Abidin CAN\OneDrive\Documentos\Orman Yangını Erken Uyarı Sistemi\.env.example) içinde bulunur.
+Örnek yapı [`.env.example`](.env.example) içinde bulunur.
 
 Önemli alanlar:
 
@@ -92,32 +100,11 @@ Test kapsamı:
 - sağlık endpoint'i
 - dashboard endpoint'i
 
-## GitHub'a Bağlama
-
-Yeni bir GitHub repo oluşturduktan sonra şu komutlar yeterli olacaktır:
-
-```bash
-git branch -M main
-git add .
-git commit -m "Initial release: wildfire early warning platform"
-git remote add origin <GITHUB_REPO_URL>
-git push -u origin main
-```
-
 ## Deploy
 
-- Docker için: [Dockerfile](C:\Users\Abidin CAN\OneDrive\Documentos\Orman Yangını Erken Uyarı Sistemi\Dockerfile)
-- Render için: [render.yaml](C:\Users\Abidin CAN\OneDrive\Documentos\Orman Yangını Erken Uyarı Sistemi\render.yaml)
-- GitHub Pages için: [pages.yml](C:\Users\Abidin CAN\OneDrive\Documentos\Orman Yangını Erken Uyarı Sistemi\.github\workflows\pages.yml)
-
-## Statik Demo Yayını
-
-`main` branch'e her push sonrası GitHub Pages workflow'u çalışacak şekilde repo hazırlandı. Bu repo için beklenen demo adresi:
-
-`https://cankhy.github.io/Orman-Yang-n-Erken-Uyar-Sistemi/`
-
-Not:
-GitHub Pages sürümü statik demo olarak çalışır. Backend API gerektiren login ve test alarmı gibi özellikler Pages üzerinde pasif moda düşer. Tam canlı backend için Render veya başka bir Node hosting servisi gerekir.
+- Docker için: [`Dockerfile`](Dockerfile)
+- Render için: [`render.yaml`](render.yaml)
+- GitHub Pages için: [`.github/workflows/pages.yml`](.github/workflows/pages.yml)
 
 ## Sonraki Üretim Adımları
 
