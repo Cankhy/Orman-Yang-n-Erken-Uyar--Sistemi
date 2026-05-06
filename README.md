@@ -108,6 +108,16 @@ git push -u origin main
 
 - Docker için: [Dockerfile](C:\Users\Abidin CAN\OneDrive\Documentos\Orman Yangını Erken Uyarı Sistemi\Dockerfile)
 - Render için: [render.yaml](C:\Users\Abidin CAN\OneDrive\Documentos\Orman Yangını Erken Uyarı Sistemi\render.yaml)
+- GitHub Pages için: [pages.yml](C:\Users\Abidin CAN\OneDrive\Documentos\Orman Yangını Erken Uyarı Sistemi\.github\workflows\pages.yml)
+
+## Statik Demo Yayını
+
+`main` branch'e her push sonrası GitHub Pages workflow'u çalışacak şekilde repo hazırlandı. Bu repo için beklenen demo adresi:
+
+`https://cankhy.github.io/Orman-Yang-n-Erken-Uyar-Sistemi/`
+
+Not:
+GitHub Pages sürümü statik demo olarak çalışır. Backend API gerektiren login ve test alarmı gibi özellikler Pages üzerinde pasif moda düşer. Tam canlı backend için Render veya başka bir Node hosting servisi gerekir.
 
 ## Sonraki Üretim Adımları
 

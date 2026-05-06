@@ -12,7 +12,9 @@ function buildLocalPayload() {
       systemMode: "simulation",
       notificationMode: "mock",
       environment: "file",
-      weatherSourceStatus: "Yerel veri"
+      weatherSourceStatus: "Yerel veri",
+      apiAvailable: false,
+      storage: "static"
     },
     user: {
       name: "Demo Kullanıcı",
@@ -58,6 +60,10 @@ export async function getDashboardData() {
       if (response.ok) {
         const payload = await response.json();
         if (Array.isArray(payload.hotspots) && Array.isArray(payload.metrics)) {
+          payload.metadata = {
+            ...payload.metadata,
+            apiAvailable: true
+          };
           return payload;
         }
       }

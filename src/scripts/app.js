@@ -201,8 +201,20 @@ function renderUserContext() {
   systemStatus.textContent = metadata.systemMode === "live" ? "Live" : "Simulation";
   integrationStatus.textContent =
     metadata.weatherSourceStatus || (metadata.systemMode === "live" ? "Canlı veri" : "Mock veri");
-  alertStatusChip.textContent =
-    metadata.notificationMode === "webhook-ready" ? "Webhook hazır" : "Bildirim mock modda";
+
+  const apiAvailable = metadata.apiAvailable !== false;
+  testAlertButton.disabled = !apiAvailable;
+  loginButton.disabled = !apiAvailable;
+  userSelect.disabled = !apiAvailable;
+
+  if (!apiAvailable) {
+    alertStatusChip.textContent = "Statik demo mod";
+    loginButton.textContent = "Pages mod";
+  } else {
+    alertStatusChip.textContent =
+      metadata.notificationMode === "webhook-ready" ? "Webhook hazır" : "Bildirim mock modda";
+    loginButton.textContent = "Oturum Aç";
+  }
 }
 
 async function populateUserSelect() {
@@ -370,6 +382,7 @@ function initialiseMap() {
 }
 
 async function sendTestAlertRequest() {
+  if (testAlertButton.disabled) return;
   testAlertButton.disabled = true;
   testAlertButton.textContent = "Gönderiliyor...";
 
@@ -448,6 +461,7 @@ function bindEvents() {
   testAlertButton.addEventListener("click", sendTestAlertRequest);
 
   loginButton.addEventListener("click", async () => {
+    if (loginButton.disabled) return;
     loginButton.disabled = true;
     loginButton.textContent = "Açılıyor...";
     try {
