@@ -4,7 +4,7 @@ Web tabanlı, harita destekli ve tam-stack mimariye sahip bir yangın karar dest
 
 ## Canlı Demo
 
-- GitHub Pages demo: [cankhy.github.io/Orman-Yang-n-Erken-Uyar-Sistemi](https://cankhy.github.io/Orman-Yang-n-Erken-Uyar-Sistemi/)
+- GitHub Pages demo: [cankhy.github.io/Orman-Yang-n-Erken-Uyar-Sistemi](https://cankhy.github.io/Orman-Yang--n-Erken-Uyar-Sistemi/)
 
 Not:
 GitHub Pages sürümü statik demo olarak çalışır. Backend API gerektiren giriş ve test alarmı gibi özellikler Pages üzerinde pasif moda düşer.
